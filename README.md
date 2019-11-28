@@ -158,3 +158,51 @@ Open up your browser and your console. When you refresh you should see your new 
 ![react console](md/loadDataToConsole.png)
 
 That’s tabletop at work. There is a lot more functionality in the documentation, but for our project that is all we need.
+
+Now we want to update our local state we setup with the new data we get from Tabletop. In the callback function we will update the simple console.log to set our state with the new Tabletop data.
+
+```javascript
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Tabletop from 'tabletop';
+
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: []
+    }
+  }
+
+  componentDidMount() {
+    Tabletop.init({
+      key: '1Bh5AV7LwiiWOlK6G-kVDX8YiWJNEyLrrYU6WEYnb_lg',
+      callback: googleData => {
+        this.setState({
+          data: googleData
+        })
+      },
+      simpleSheet: true
+    })
+  }
+
+  render() {
+    console.log('updated state --->', this.state)
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">React + Google Sheets Demo</h1>
+        </header>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Now if we open our console and refresh we are going to see the updated state console logged out from line 29. We will see the state log twice — once with the initial empty array and a second time with the data once it’s loaded
+
+![set to state](md/setState.gif)
