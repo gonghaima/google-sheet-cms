@@ -81,3 +81,33 @@ In order for Tabletop to read our data there are a few quick changes we will nee
 
 ![google sheet url](md/gsheeturl.png)
 
+Back to react.
+
+We will need to make a few updates to our App.js file before we start working with Tabletop. We will be adding a local state to this component so we can store the results from our Tabletop call and reflect any updates made in Google Sheets. Next, update the App.js file to include the following local state with our data initialized as an empty array. Remember, the response we are getting from Tabletop will be an array.
+
+```javascript
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: []
+    }
+  }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">React + Google Sheets Demo</h1>
+        </header>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
